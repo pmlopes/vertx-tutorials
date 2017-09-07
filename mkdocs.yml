@@ -76,19 +76,10 @@ markdown_extensions:
 # Page tree
 pages:
   - Welcome: index.md
-  # - Getting started: getting-started.md
   - Tutorials:
     - Oauth2: oauth2/github.md
-    # - Admonition: extensions/admonition.md
-  #   - CodeHilite: extensions/codehilite.md
-  #   - Footnotes: extensions/footnotes.md
-  #   - Metadata: extensions/metadata.md
-  #   - Permalinks: extensions/permalinks.md
-  #   - PyMdown: extensions/pymdown.md
-  # - Specimen: specimen.md
-  # - Customization: customization.md
-  # - Release notes: release-notes.md
-  # - Contributing: contributing.md
+    - Web Development Workflow: web/workflow.md
+  - Contributing: contributing.md
   - License: license.md
 
 # Google Analytics
