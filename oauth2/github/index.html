@@ -1,0 +1,864 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="A open community curated collection of tutorials for Eclipse Vert.x">
+      
+      
+        <link rel="canonical" href="http://vertx-tutorials.jetdrone.xyz/oauth2/github/">
+      
+      
+        <meta name="author" content="Paulo Lopes">
+      
+      
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.8.1">
+    
+    
+      
+        <title>Oauth2 - Tutorials for Vert.x</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-bfecc7305d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-02c2a4388f.palette.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body data-md-color-primary="deep-purple" data-md-color-accent="purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="http://vertx-tutorials.jetdrone.xyz" title="Tutorials for Vert.x" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Tutorials
+                </span>
+              
+            
+            Oauth2
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="" data-md-lang-tokenizer="[\s\-]+">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+
+  <a href="https://github.com/pmlopes/vertx-tutorials" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      pmlopes/vertx-tutorials
+    </div>
+  </a>
+
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    Tutorials for Vert.x
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/pmlopes/vertx-tutorials" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      pmlopes/vertx-tutorials
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Oauth2
+      </label>
+    
+    <a href="./" title="Oauth2" class="md-nav__link md-nav__link--active">
+      Oauth2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#registering-your-app" title="Registering your app" class="md-nav__link">
+    Registering your app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accepting-user-authorization" title="Accepting user authorization" class="md-nav__link">
+    Accepting user authorization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-a-callback" title="Providing a callback" class="md-nav__link">
+    Providing a callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-granted-scopes" title="Checking granted scopes" class="md-nav__link">
+    Checking granted scopes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-authenticated-request" title="Making authenticated request" class="md-nav__link">
+    Making authenticated request
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-persistent-authentication" title="Implementing "persistent" authentication" class="md-nav__link">
+    Implementing "persistent" authentication
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" title="Contributing" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../license/" title="License" class="md-nav__link">
+      License
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#registering-your-app" title="Registering your app" class="md-nav__link">
+    Registering your app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accepting-user-authorization" title="Accepting user authorization" class="md-nav__link">
+    Accepting user authorization
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#providing-a-callback" title="Providing a callback" class="md-nav__link">
+    Providing a callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-granted-scopes" title="Checking granted scopes" class="md-nav__link">
+    Checking granted scopes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#making-authenticated-request" title="Making authenticated request" class="md-nav__link">
+    Making authenticated request
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementing-persistent-authentication" title="Implementing "persistent" authentication" class="md-nav__link">
+    Implementing "persistent" authentication
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="basics-of-authentication">Basics of Authentication<a class="headerlink" href="#basics-of-authentication" title="Permanent link">&para;</a></h1>
+<p>In this section, we're going to focus on the basics of authentication. Specifically, we're going to create a Java server (using <a href="http://vertx.io">vert.x</a>) that implements the <a href="https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/">web flow</a> of an application in several different ways.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can download the complete source code for this project from the <a href="https://github.com/vert-x3/vertx-examples">vertx-examples</a> repo.</p>
+</div>
+<h2 id="registering-your-app">Registering your app<a class="headerlink" href="#registering-your-app" title="Permanent link">&para;</a></h2>
+<p>First, you'll need to <a href="https://github.com/settings/applications/new">register your application</a>. Every registered OAuth application is assigned a unique Client ID and Client Secret. The Client Secret should not be shared! That includes checking the string into your repository.</p>
+<p>You can fill out every piece of information however you like, except the <strong>Authorization callback URL</strong>. This is easily the most important piece to setting up your application. It's the callback URL that GitHub returns the user to after successful authentication.</p>
+<p>Since we're running a regular Sinatra server, the location of the local instance is set to <code>http://localhost:8080</code>. Let's fill in the callback URL as <code>http://localhost:8080/callback</code>.</p>
+<h2 id="accepting-user-authorization">Accepting user authorization<a class="headerlink" href="#accepting-user-authorization" title="Permanent link">&para;</a></h2>
+<p>Now, let's start filling out our simple server. Create a class called <code>io.acme.Server</code> and paste this into it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">io.acme</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">io.vertx.core.AbstractVerticle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.core.json.JsonObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.auth.oauth2.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.auth.oauth2.providers.GithubAuth</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.web.Router</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.web.handler.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.web.templ.HandlebarsTemplateEngine</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Server</span> <span class="kd">extends</span> <span class="n">AbstractVerticle</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CLIENT_ID</span> <span class="o">=</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">getEnv</span><span class="o">(</span><span class="s">&quot;GITHUB_CLIENT_ID&quot;</span><span class="o">);</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CLIENT_SECRET</span> <span class="o">=</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">getEnv</span><span class="o">(</span><span class="s">&quot;GITHUB_CLIENT_SECRET&quot;</span><span class="o">);</span>
+
+  <span class="c1">// In order to use a template we first need to</span>
+  <span class="c1">// create an engine</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="n">HandlebarsTemplateEngine</span> <span class="n">engine</span> <span class="o">=</span>
+    <span class="n">HandlebarsTemplateEngine</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="c1">// To simplify the development of the web components</span>
+    <span class="c1">// we use a Router to route all HTTP requests</span>
+    <span class="c1">// to organize our code in a reusable way.</span>
+    <span class="kd">final</span> <span class="n">Router</span> <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="o">.</span><span class="na">router</span><span class="o">(</span><span class="n">vertx</span><span class="o">);</span>
+    <span class="c1">// we now protect the resource under the path &quot;/protected&quot;</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">(</span><span class="s">&quot;/protected&quot;</span><span class="o">).</span><span class="na">handler</span><span class="o">(</span>
+      <span class="n">OAuth2AuthHandler</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">authProvider</span><span class="o">)</span>
+        <span class="c1">// for this resource we require that users have</span>
+        <span class="c1">// the authority to retrieve the user emails</span>
+        <span class="o">.</span><span class="na">addAuthority</span><span class="o">(</span><span class="s">&quot;user:email&quot;</span><span class="o">)</span>
+    <span class="o">);</span>
+    <span class="c1">// Entry point to the application, this will render</span>
+    <span class="c1">// a custom template.</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;/&quot;</span><span class="o">).</span><span class="na">handler</span><span class="o">(</span><span class="n">ctx</span> <span class="o">-&gt;</span> <span class="o">{</span>
+      <span class="c1">// we pass the client id to the template</span>
+      <span class="n">ctx</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;client_id&quot;</span><span class="o">,</span> <span class="n">CLIENT_ID</span><span class="o">);</span>
+      <span class="c1">// and now delegate to the engine to render it.</span>
+      <span class="n">engine</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="s">&quot;views&quot;</span><span class="o">,</span> <span class="s">&quot;/index.hbs&quot;</span><span class="o">,</span> <span class="n">res</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">succeeded</span><span class="o">())</span> <span class="o">{</span>
+          <span class="n">ctx</span><span class="o">.</span><span class="na">response</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">putHeader</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;text/html&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">end</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">result</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+          <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+        <span class="o">}</span>
+      <span class="o">});</span>
+    <span class="o">});</span>
+    <span class="c1">// The protected resource</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;/protected&quot;</span><span class="o">).</span><span class="na">handler</span><span class="o">(</span><span class="n">ctx</span> <span class="o">-&gt;</span> <span class="o">{</span>
+      <span class="n">ctx</span><span class="o">.</span><span class="na">response</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">end</span><span class="o">(</span><span class="s">&quot;Hello protected!&quot;</span><span class="o">);</span>
+    <span class="o">});</span>
+
+    <span class="n">vertx</span><span class="o">.</span><span class="na">createHttpServer</span><span class="o">()</span>
+      <span class="o">.</span><span class="na">requestHandler</span><span class="o">(</span><span class="n">router</span><span class="o">::</span><span class="n">accept</span><span class="o">)</span>
+      <span class="o">.</span><span class="na">listen</span><span class="o">(</span><span class="mi">8080</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>Your client ID and client secret keys come from <a href="https://github.com/settings/developers">your application's configuration page</a>. You should <strong>never, ever</strong> store these values in GitHub--or any other public place, for that matter. We recommend storing them as <a href="http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables">environment variables</a> -- which is exactly what we've done here.</p>
+<p>Notice that the protected resource uses the scope <code>user:email</code> to define the scopes requested by the application. For our application, we're requesting <code>user:email</code> scope for reading private email addresses.</p>
+<p>Next, in the <em>project resources</em> create the template <code>views/index.hbs</code> and paste this content:</p>
+<div class="codehilite"><pre><span></span>&lt;html&gt;
+  &lt;body&gt;
+    &lt;p&gt;
+      Well, hello there!
+    &lt;/p&gt;
+    &lt;p&gt;
+      We&#39;re going to the protected resource, if there is no
+      user in the session we will talk to the GitHub API. Ready?
+      &lt;a href=&quot;/protected&quot;&gt;Click here&lt;/a&gt; to begin!&lt;/a&gt;
+    &lt;/p&gt;
+    &lt;p&gt;
+      &lt;b&gt;If that link doesn&#39;t work&lt;/b&gt;, remember to provide
+      your own &lt;a href=&quot;https://github.com/settings/applications/new&quot;&gt;
+      Client ID&lt;/a&gt;!
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<p>(If you're unfamiliar with how <a href="http://handlebarsjs.com/">Handlebars</a> works, we recommend reading the <a href="http://handlebarsjs.com/">Handlebars</a> guide.)</p>
+<p>Navigate your browser to <a href="http://localhost:8080"><a href="http://localhost:8080">http://localhost:8080</a></a>. After clicking on the link, you should be taken to GitHub, and presented with a dialog that looks something like this:</p>
+<p><img alt="" src="../images/oauth_prompt.png" /></p>
+<p>If you trust yourself, click <strong>Authorize App</strong>. Wuh-oh! Vert.x spits out a 500 error (with the message <code>callback route is not configured</code>). What gives?!</p>
+<p>Well, remember when we specified a Callback URL to be <code>callback</code>? We didn't provide a route for it, so GitHub doesn't know where to drop the user after they authorize the app. Let's fix that now!</p>
+<h3 id="providing-a-callback">Providing a callback<a class="headerlink" href="#providing-a-callback" title="Permanent link">&para;</a></h3>
+<p>In the <code>Server</code> class you don't need to know the internal of the OAuth2 protocol, the <code>OAuth2AuthHandler</code> can do it for if you configure the protection as:</p>
+<div class="codehilite"><pre><span></span><span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">(</span><span class="s">&quot;/protected&quot;</span><span class="o">).</span><span class="na">handler</span><span class="o">(</span>
+  <span class="n">OAuth2AuthHandler</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">authProvider</span><span class="o">)</span>
+    <span class="c1">// we now configure the oauth2 handler,</span>
+    <span class="c1">// it will setup the callback handler</span>
+    <span class="c1">// as expected by your oauth2 provider.</span>
+    <span class="o">.</span><span class="na">setupCallback</span><span class="o">(</span><span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">(</span><span class="s">&quot;/callback&quot;</span><span class="o">))</span>
+    <span class="c1">// for this resource we require that</span>
+    <span class="c1">// users have the authority to retrieve</span>
+    <span class="c1">// the user emails</span>
+    <span class="o">.</span><span class="na">addAuthority</span><span class="o">(</span><span class="s">&quot;user:email&quot;</span><span class="o">));</span>
+</pre></div>
+
+<p>After a successful app authentication, GitHub provides a temporary <code>code</code> value. This code is then <code>POST</code>ed back to GitHub in exchange for an <code>access_token</code> which is in turn translated to a <code>User</code> instance in your vert.x application. All this is taken care for you by the handler.</p>
+<h3 id="checking-granted-scopes">Checking granted scopes<a class="headerlink" href="#checking-granted-scopes" title="Permanent link">&para;</a></h3>
+<p>Before the <code>User</code> object is handled to you, if your handler was configured with <code>authorities</code> they will be first checked. If they are not present then they the whole process is aborted with an <code>Authorization</code> error.</p>
+<p>However you might want to assert for other granted authorities, in this case you would:</p>
+<div class="codehilite"><pre><span></span><span class="n">ctx</span><span class="o">.</span><span class="na">user</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">isAuthorised</span><span class="o">(</span><span class="s">&quot;some:authority&quot;</span><span class="o">,</span> <span class="n">res</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">failed</span><span class="o">())</span> <span class="o">{</span>
+      <span class="c1">// some error handling here...</span>
+    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">result</span><span class="o">())</span> <span class="o">{</span>
+        <span class="c1">// is authorized!</span>
+      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="c1">// is not authorized!</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">});</span>
+</pre></div>
+
+<h3 id="making-authenticated-request">Making authenticated request<a class="headerlink" href="#making-authenticated-request" title="Permanent link">&para;</a></h3>
+<p>At last, with this access token, you'll be able to make authenticated requests as the logged in user:</p>
+<div class="codehilite"><pre><span></span><span class="c1">// we cast the user to a specialized implementation</span>
+<span class="n">AccessToken</span> <span class="n">user</span> <span class="o">=</span> <span class="o">(</span><span class="n">AccessToken</span><span class="o">)</span> <span class="n">ctx</span><span class="o">.</span><span class="na">user</span><span class="o">();</span>
+<span class="c1">// retrieve the user profile, this is a common feature</span>
+<span class="c1">// but not from the official OAuth2 spec</span>
+<span class="n">user</span><span class="o">.</span><span class="na">userInfo</span><span class="o">(</span><span class="n">res</span> <span class="o">-&gt;</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">failed</span><span class="o">())</span> <span class="o">{</span>
+    <span class="c1">// request didn&#39;t succeed because the token was revoked so we</span>
+    <span class="c1">// invalidate the token stored in the session and render the</span>
+    <span class="c1">// index page so that the user can start the OAuth flow again</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">session</span><span class="o">().</span><span class="na">destroy</span><span class="o">();</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+    <span class="k">return</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="c1">// the request succeeded, so we use the API to fetch the user&#39;s emails</span>
+  <span class="kd">final</span> <span class="n">JsonObject</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">result</span><span class="o">();</span>
+
+  <span class="c1">// fetch the user emails from the github API</span>
+
+  <span class="c1">// the fetch method will retrieve any resource and ensure the right</span>
+  <span class="c1">// secure headers are passed.</span>
+  <span class="n">user</span><span class="o">.</span><span class="na">fetch</span><span class="o">(</span><span class="s">&quot;https://api.github.com/user/emails&quot;</span><span class="o">,</span> <span class="n">res2</span> <span class="o">-&gt;</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">res2</span><span class="o">.</span><span class="na">failed</span><span class="o">())</span> <span class="o">{</span>
+      <span class="n">ctx</span><span class="o">.</span><span class="na">session</span><span class="o">().</span><span class="na">destroy</span><span class="o">();</span>
+      <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+      <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="n">userInfo</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;private_emails&quot;</span><span class="o">,</span> <span class="n">res2</span><span class="o">.</span><span class="na">result</span><span class="o">().</span><span class="na">jsonArray</span><span class="o">());</span>
+    <span class="c1">// we pass the client info to the template</span>
+    <span class="n">ctx</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;userInfo&quot;</span><span class="o">,</span> <span class="n">userInfo</span><span class="o">);</span>
+    <span class="c1">// and now delegate to the engine to render it.</span>
+    <span class="n">engine</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="s">&quot;views&quot;</span><span class="o">,</span> <span class="s">&quot;/advanced.hbs&quot;</span><span class="o">,</span> <span class="n">res3</span> <span class="o">-&gt;</span> <span class="o">{</span>
+      <span class="k">if</span> <span class="o">(</span><span class="n">res3</span><span class="o">.</span><span class="na">succeeded</span><span class="o">())</span> <span class="o">{</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="na">response</span><span class="o">()</span>
+          <span class="o">.</span><span class="na">putHeader</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;text/html&quot;</span><span class="o">)</span>
+          <span class="o">.</span><span class="na">end</span><span class="o">(</span><span class="n">res3</span><span class="o">.</span><span class="na">result</span><span class="o">());</span>
+      <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res3</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+      <span class="o">}</span>
+    <span class="o">});</span>
+  <span class="o">});</span>
+<span class="o">});</span>
+</pre></div>
+
+<p>We can do whatever we want with our results. In this case, we'll just dump them straight into <code>advanced.hbs</code>:</p>
+<div class="codehilite"><pre><span></span>&lt;html&gt;
+&lt;body&gt;
+&lt;p&gt;Well, well, well, {{userInfo.login}}!&lt;/p&gt;
+&lt;p&gt;
+  {{#if userInfo.email}} It looks like your public email
+  address is {{userInfo.email}}.
+  {{else}} It looks like you don&#39;t have a public email.
+  That&#39;s cool.
+  {{/if}}
+&lt;/p&gt;
+&lt;p&gt;
+  {{#if userInfo.private_emails}}
+  With your permission, we were also able to dig up your
+  private email addresses:
+  {{#each userInfo.private_emails}}
+    {{email}}{{#unless @last}},{{/unless}}
+  {{/each}}
+  {{else}}
+  Also, you&#39;re a bit secretive about your private email
+  addresses.
+  {{/if}}
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+
+<h2 id="implementing-persistent-authentication">Implementing "persistent" authentication<a class="headerlink" href="#implementing-persistent-authentication" title="Permanent link">&para;</a></h2>
+<p>It'd be a pretty bad model if we required users to log into the app every single time they needed to access the web page. For example, try navigating directly to <code>http://localhost:8080/protected</code>. You'll get an authentication request over and over.</p>
+<p>What if we could circumvent the entire "click here" process, and just remember that, as long as the user's logged into GitHub, they should be able to access this application? Hold on to your hat, because that's <em>exactly what we're going to do</em>.</p>
+<p>Our little server above is rather simple. In order to wedge in some intelligent authentication, we're going to switch over to using sessions for storing tokens. This will make authentication transparent to the user.</p>
+<p>This can be achived with the stock handlers so our server file would be:</p>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nn">io.acme</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">io.vertx.core.AbstractVerticle</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.core.json.JsonObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.auth.oauth2.AccessToken</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.auth.oauth2.OAuth2Auth</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.auth.oauth2.providers.GithubAuth</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.web.Router</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.web.handler.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.web.sstore.LocalSessionStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.vertx.ext.web.templ.HandlebarsTemplateEngine</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Server</span> <span class="kd">extends</span> <span class="n">AbstractVerticle</span> <span class="o">{</span>
+
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CLIENT_ID</span> <span class="o">=</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">getEnv</span><span class="o">(</span><span class="s">&quot;GITHUB_CLIENT_ID&quot;</span><span class="o">);</span>
+  <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">String</span> <span class="n">CLIENT_SECRET</span> <span class="o">=</span>
+    <span class="n">System</span><span class="o">.</span><span class="na">getEnv</span><span class="o">(</span><span class="s">&quot;GITHUB_CLIENT_SECRET&quot;</span><span class="o">);</span>
+
+  <span class="c1">// In order to use a template we first need to</span>
+  <span class="c1">// create an engine</span>
+  <span class="kd">private</span> <span class="kd">final</span> <span class="n">HandlebarsTemplateEngine</span> <span class="n">engine</span> <span class="o">=</span>
+    <span class="n">HandlebarsTemplateEngine</span><span class="o">.</span><span class="na">create</span><span class="o">();</span>
+
+  <span class="nd">@Override</span>
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">start</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+    <span class="c1">// To simplify the development of the web components</span>
+    <span class="c1">// we use a Router to route all HTTP requests</span>
+    <span class="c1">// to organize our code in a reusable way.</span>
+    <span class="kd">final</span> <span class="n">Router</span> <span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="o">.</span><span class="na">router</span><span class="o">(</span><span class="n">vertx</span><span class="o">);</span>
+    <span class="c1">// We need cookies and sessions</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">()</span>
+      <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="n">CookieHandler</span><span class="o">.</span><span class="na">create</span><span class="o">());</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">()</span>
+      <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="n">SessionHandler</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">LocalSessionStore</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">vertx</span><span class="o">)));</span>
+    <span class="c1">// Simple auth service which uses a GitHub to</span>
+    <span class="c1">// authenticate the user</span>
+    <span class="n">OAuth2Auth</span> <span class="n">authProvider</span> <span class="o">=</span>
+      <span class="n">GithubAuth</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">vertx</span><span class="o">,</span> <span class="n">CLIENT_ID</span><span class="o">,</span> <span class="n">CLIENT_SECRET</span><span class="o">);</span>
+    <span class="c1">// We need a user session handler too to make sure</span>
+    <span class="c1">// the user is stored in the session between requests</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">()</span>
+      <span class="o">.</span><span class="na">handler</span><span class="o">(</span><span class="n">UserSessionHandler</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">authProvider</span><span class="o">));</span>
+    <span class="c1">// we now protect the resource under the path &quot;/protected&quot;</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">(</span><span class="s">&quot;/protected&quot;</span><span class="o">).</span><span class="na">handler</span><span class="o">(</span>
+      <span class="n">OAuth2AuthHandler</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">authProvider</span><span class="o">)</span>
+        <span class="c1">// we now configure the oauth2 handler, it will</span>
+        <span class="c1">// setup the callback handler</span>
+        <span class="c1">// as expected by your oauth2 provider.</span>
+        <span class="o">.</span><span class="na">setupCallback</span><span class="o">(</span><span class="n">router</span><span class="o">.</span><span class="na">route</span><span class="o">(</span><span class="s">&quot;/callback&quot;</span><span class="o">))</span>
+        <span class="c1">// for this resource we require that users have</span>
+        <span class="c1">// the authority to retrieve the user emails</span>
+        <span class="o">.</span><span class="na">addAuthority</span><span class="o">(</span><span class="s">&quot;user:email&quot;</span><span class="o">)</span>
+    <span class="o">);</span>
+    <span class="c1">// Entry point to the application, this will render</span>
+    <span class="c1">// a custom template.</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;/&quot;</span><span class="o">).</span><span class="na">handler</span><span class="o">(</span><span class="n">ctx</span> <span class="o">-&gt;</span> <span class="o">{</span>
+      <span class="c1">// we pass the client id to the template</span>
+      <span class="n">ctx</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;client_id&quot;</span><span class="o">,</span> <span class="n">CLIENT_ID</span><span class="o">);</span>
+      <span class="c1">// and now delegate to the engine to render it.</span>
+      <span class="n">engine</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="s">&quot;views&quot;</span><span class="o">,</span> <span class="s">&quot;/index.hbs&quot;</span><span class="o">,</span> <span class="n">res</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">succeeded</span><span class="o">())</span> <span class="o">{</span>
+          <span class="n">ctx</span><span class="o">.</span><span class="na">response</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">putHeader</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;text/html&quot;</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">end</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">result</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+          <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+        <span class="o">}</span>
+      <span class="o">});</span>
+    <span class="o">});</span>
+    <span class="c1">// The protected resource</span>
+    <span class="n">router</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">&quot;/protected&quot;</span><span class="o">).</span><span class="na">handler</span><span class="o">(</span><span class="n">ctx</span> <span class="o">-&gt;</span> <span class="o">{</span>
+      <span class="n">AccessToken</span> <span class="n">user</span> <span class="o">=</span> <span class="o">(</span><span class="n">AccessToken</span><span class="o">)</span> <span class="n">ctx</span><span class="o">.</span><span class="na">user</span><span class="o">();</span>
+      <span class="c1">// retrieve the user profile, this is a common</span>
+      <span class="c1">// feature but not from the official OAuth2 spec</span>
+      <span class="n">user</span><span class="o">.</span><span class="na">userInfo</span><span class="o">(</span><span class="n">res</span> <span class="o">-&gt;</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">failed</span><span class="o">())</span> <span class="o">{</span>
+          <span class="c1">// request didn&#39;t succeed because the token</span>
+          <span class="c1">// was revoked so we invalidate the token stored</span>
+          <span class="c1">// in the session and render an error page</span>
+          <span class="c1">// so that the user can start the OAuth flow again</span>
+          <span class="n">ctx</span><span class="o">.</span><span class="na">session</span><span class="o">().</span><span class="na">destroy</span><span class="o">();</span>
+          <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+          <span class="c1">// the request succeeded, so we use the API to</span>
+          <span class="c1">// fetch the user&#39;s emails</span>
+          <span class="kd">final</span> <span class="n">JsonObject</span> <span class="n">userInfo</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="na">result</span><span class="o">();</span>
+
+          <span class="c1">// fetch the user emails from the github API</span>
+
+          <span class="c1">// the fetch method will retrieve any resource and</span>
+          <span class="c1">// ensure the right secure headers are passed.</span>
+          <span class="n">user</span><span class="o">.</span><span class="na">fetch</span><span class="o">(</span><span class="s">&quot;https://api.github.com/user/emails&quot;</span><span class="o">,</span> <span class="n">res2</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">res2</span><span class="o">.</span><span class="na">failed</span><span class="o">())</span> <span class="o">{</span>
+              <span class="c1">// request didn&#39;t succeed because the token</span>
+              <span class="c1">// was revoked so we invalidate the token stored</span>
+              <span class="c1">// in the session and render an error page</span>
+              <span class="c1">// so that the user can start the OAuth flow again</span>
+              <span class="n">ctx</span><span class="o">.</span><span class="na">session</span><span class="o">().</span><span class="na">destroy</span><span class="o">();</span>
+              <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res2</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+              <span class="n">userInfo</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;private_emails&quot;</span><span class="o">,</span> <span class="n">res2</span><span class="o">.</span><span class="na">result</span><span class="o">().</span><span class="na">jsonArray</span><span class="o">());</span>
+              <span class="c1">// we pass the client info to the template</span>
+              <span class="n">ctx</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">&quot;userInfo&quot;</span><span class="o">,</span> <span class="n">userInfo</span><span class="o">);</span>
+              <span class="c1">// and now delegate to the engine to render it.</span>
+              <span class="n">engine</span><span class="o">.</span><span class="na">render</span><span class="o">(</span><span class="n">ctx</span><span class="o">,</span> <span class="s">&quot;views&quot;</span><span class="o">,</span> <span class="s">&quot;/advanced.hbs&quot;</span><span class="o">,</span> <span class="n">res3</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">res3</span><span class="o">.</span><span class="na">succeeded</span><span class="o">())</span> <span class="o">{</span>
+                  <span class="n">ctx</span><span class="o">.</span><span class="na">response</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">putHeader</span><span class="o">(</span><span class="s">&quot;Content-Type&quot;</span><span class="o">,</span> <span class="s">&quot;text/html&quot;</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">end</span><span class="o">(</span><span class="n">res3</span><span class="o">.</span><span class="na">result</span><span class="o">());</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                  <span class="n">ctx</span><span class="o">.</span><span class="na">fail</span><span class="o">(</span><span class="n">res3</span><span class="o">.</span><span class="na">cause</span><span class="o">());</span>
+                <span class="o">}</span>
+              <span class="o">});</span>
+            <span class="o">}</span>
+          <span class="o">});</span>
+        <span class="o">}</span>
+      <span class="o">});</span>
+    <span class="o">});</span>
+
+    <span class="n">vertx</span><span class="o">.</span><span class="na">createHttpServer</span><span class="o">().</span><span class="na">requestHandler</span><span class="o">(</span><span class="n">router</span><span class="o">::</span><span class="n">accept</span><span class="o">).</span><span class="na">listen</span><span class="o">(</span><span class="mi">8080</span><span class="o">);</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+<p>I hope you now can use OAuth2 on your next project!</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../.." title="Welcome" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Welcome
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../contributing/" title="Contributing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Contributing
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 Paulo Lopes
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="http://jetdrone.xyz" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/pmlopes" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/jetdrone" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://linkedin.com/in/pmlopes" class="md-footer-social__link fa fa-linkedin"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-6940329b9f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+    
+    
+      
+      <script>!function(e,t,a,n,o,c,i){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,c=t.createElement(a),i=t.getElementsByTagName(a)[0],c.async=1,c.src=n,i.parentNode.insertBefore(c,i)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-84828576-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var t=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",t,e.href)})});var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})</script>
+      
+    
+  </body>
+</html>

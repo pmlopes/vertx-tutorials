@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>http://vertx-tutorials.jetdrone.xyz/</loc>
+     <lastmod>2017-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+        
+    <url>
+     <loc>http://vertx-tutorials.jetdrone.xyz/oauth2/github/</loc>
+     <lastmod>2017-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+    <url>
+     <loc>http://vertx-tutorials.jetdrone.xyz/contributing/</loc>
+     <lastmod>2017-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>http://vertx-tutorials.jetdrone.xyz/license/</loc>
+     <lastmod>2017-09-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>
