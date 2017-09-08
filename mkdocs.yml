@@ -77,8 +77,9 @@ markdown_extensions:
 pages:
   - Welcome: index.md
   - Tutorials:
-    - Oauth2: oauth2/github.md
-    - Web Development Workflow: web/workflow.md
+    - Oauth2: tutorials/oauth2/github.md
+  - Tips:
+    - Web Development Workflow: tips/web/workflow.md
   - Contributing: contributing.md
   - License: license.md
 
