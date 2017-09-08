@@ -88,7 +88,7 @@ Notice that the protected resource uses the scope `user:email` to define the sco
 
 Next, in the *project resources* create the template `views/index.hbs` and paste this content:
 
-```hbs
+```html
 <html>
   <body>
     <p>
@@ -210,7 +210,7 @@ user.userInfo(res -> {
 
 We can do whatever we want with our results. In this case, we'll just dump them straight into `advanced.hbs`:
 
-```hbs
+```html+handlebars
 <html>
 <body>
 <p>Well, well, well, {{userInfo.login}}!</p>
