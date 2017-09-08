@@ -4,7 +4,7 @@
     
     <url>
      <loc>http://vertx-tutorials.jetdrone.xyz/</loc>
-     <lastmod>2017-09-07</lastmod>
+     <lastmod>2017-09-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,14 +12,18 @@
     
         
     <url>
-     <loc>http://vertx-tutorials.jetdrone.xyz/oauth2/github/</loc>
-     <lastmod>2017-09-07</lastmod>
+     <loc>http://vertx-tutorials.jetdrone.xyz/tutorials/oauth2/github/</loc>
+     <lastmod>2017-09-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
+    
+
+    
+        
     <url>
-     <loc>http://vertx-tutorials.jetdrone.xyz/web/workflow/</loc>
-     <lastmod>2017-09-07</lastmod>
+     <loc>http://vertx-tutorials.jetdrone.xyz/tips/web/workflow/</loc>
+     <lastmod>2017-09-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -28,7 +32,7 @@
     
     <url>
      <loc>http://vertx-tutorials.jetdrone.xyz/contributing/</loc>
-     <lastmod>2017-09-07</lastmod>
+     <lastmod>2017-09-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +40,7 @@
     
     <url>
      <loc>http://vertx-tutorials.jetdrone.xyz/license/</loc>
-     <lastmod>2017-09-07</lastmod>
+     <lastmod>2017-09-08</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
