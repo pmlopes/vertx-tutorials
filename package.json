@@ -1,0 +1,13 @@
+{
+  "name": "vertx-tutorials",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "mkdocs serve"
+  },
+
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-shell": "^0.6.3"
+  }
+}
