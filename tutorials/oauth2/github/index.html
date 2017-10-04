@@ -537,23 +537,23 @@
 <p>Your client ID and client secret keys come from <a href="https://github.com/settings/developers">your application's configuration page</a>. You should <strong>never, ever</strong> store these values in GitHub--or any other public place, for that matter. We recommend storing them as <a href="http://en.wikipedia.org/wiki/Environment_variable#Getting_and_setting_environment_variables">environment variables</a> -- which is exactly what we've done here.</p>
 <p>Notice that the protected resource uses the scope <code>user:email</code> to define the scopes requested by the application. For our application, we're requesting <code>user:email</code> scope for reading private email addresses.</p>
 <p>Next, in the <em>project resources</em> create the template <code>views/index.hbs</code> and paste this content:</p>
-<div class="codehilite"><pre><span></span>&lt;html&gt;
-  &lt;body&gt;
-    &lt;p&gt;
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
       Well, hello there!
-    &lt;/p&gt;
-    &lt;p&gt;
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
       We&#39;re going to the protected resource, if there is no
       user in the session we will talk to the GitHub API. Ready?
-      &lt;a href=&quot;/protected&quot;&gt;Click here&lt;/a&gt; to begin!&lt;/a&gt;
-    &lt;/p&gt;
-    &lt;p&gt;
-      &lt;b&gt;If that link doesn&#39;t work&lt;/b&gt;, remember to provide
-      your own &lt;a href=&quot;https://github.com/settings/applications/new&quot;&gt;
-      Client ID&lt;/a&gt;!
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+      <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/protected&quot;</span><span class="p">&gt;</span>Click here<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> to begin!<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">b</span><span class="p">&gt;</span>If that link doesn&#39;t work<span class="p">&lt;/</span><span class="nt">b</span><span class="p">&gt;</span>, remember to provide
+      your own <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://github.com/settings/applications/new&quot;</span><span class="p">&gt;</span>
+      Client ID<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>!
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 
 <p>(If you're unfamiliar with how <a href="http://handlebarsjs.com/">Handlebars</a> works, we recommend reading the <a href="http://handlebarsjs.com/">Handlebars</a> guide.)</p>
@@ -641,30 +641,30 @@
 </pre></div>
 
 <p>We can do whatever we want with our results. In this case, we'll just dump them straight into <code>advanced.hbs</code>:</p>
-<div class="codehilite"><pre><span></span>&lt;html&gt;
-&lt;body&gt;
-&lt;p&gt;Well, well, well, {{userInfo.login}}!&lt;/p&gt;
-&lt;p&gt;
-  {{#if userInfo.email}} It looks like your public email
-  address is {{userInfo.email}}.
-  {{else}} It looks like you don&#39;t have a public email.
+<div class="codehilite"><pre><span></span><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Well, well, well, <span class="cp">{{</span><span class="nv">userInfo.login</span><span class="cp">}}</span>!<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="cp">{{</span><span class="k">#if</span> <span class="nv">userInfo.email</span><span class="cp">}}</span> It looks like your public email
+  address is <span class="cp">{{</span><span class="nv">userInfo.email</span><span class="cp">}}</span>.
+  <span class="cp">{{</span><span class="k">else</span><span class="cp">}}</span> It looks like you don&#39;t have a public email.
   That&#39;s cool.
-  {{/if}}
-&lt;/p&gt;
-&lt;p&gt;
-  {{#if userInfo.private_emails}}
+  <span class="cp">{{</span><span class="k">/if</span><span class="cp">}}</span>
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="cp">{{</span><span class="k">#if</span> <span class="nv">userInfo.private_emails</span><span class="cp">}}</span>
   With your permission, we were also able to dig up your
   private email addresses:
-  {{#each userInfo.private_emails}}
-    {{email}}{{#unless @last}},{{/unless}}
-  {{/each}}
-  {{else}}
+  <span class="cp">{{</span><span class="k">#each</span> <span class="nv">userInfo.private_emails</span><span class="cp">}}</span>
+    <span class="cp">{{</span><span class="nv">email</span><span class="cp">}}{{</span><span class="k">#unless</span> <span class="err">@</span><span class="nv">last</span><span class="cp">}}</span>,<span class="cp">{{</span><span class="k">/unless</span><span class="cp">}}</span>
+  <span class="cp">{{</span><span class="k">/each</span><span class="cp">}}</span>
+  <span class="cp">{{</span><span class="k">else</span><span class="cp">}}</span>
   Also, you&#39;re a bit secretive about your private email
   addresses.
-  {{/if}}
-&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+  <span class="cp">{{</span><span class="k">/if</span><span class="cp">}}</span>
+<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
 
 <h2 id="implementing-persistent-authentication">Implementing "persistent" authentication<a class="headerlink" href="#implementing-persistent-authentication" title="Permanent link">&para;</a></h2>
